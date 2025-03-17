@@ -1,14 +1,31 @@
-const currentUser = "Grace Hopper"; // You can use any name here
+function scuberGreetingForFeet(distance) {
+  if (distance <= 400) {
+    return "This one is on me!";
+  } else if (distance > 400 && distance <= 2000) {
+    return "That will be twenty bucks.";
+  } else if (distance > 2000 && distance <= 2500) {
+    return "I will gladly take your thirty bucks.";
+  } else {
+    return "No can do.";
+  }
+}
 
-const welcomeMessage = `Welcome to Flatbook, ${currentUser}!`;
+function ternaryCheckCity(city) {
+  return city === "NYC" ? "Ok, sounds good." : "No go.";
+}
 
-const excitedWelcomeMessage = welcomeMessage.toUpperCase();
-
-const shortGreeting = `Welcome, ${currentUser.slice(0, 1)}!`;
-
+function switchOnCharmFromTip(tip) {
+  switch (tip) {
+    case "generous":
+      return "Thank you so much.";
+    case "not as generous":
+      return "Thank you.";
+    default:
+      return "Bye.";
+  }
+}
 module.exports = {
-  currentUser,
-  welcomeMessage,
-  excitedWelcomeMessage,
-  shortGreeting,
+  scuberGreetingForFeet,
+  ternaryCheckCity,
+  switchOnCharmFromTip,
 };

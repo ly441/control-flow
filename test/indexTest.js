@@ -1,61 +1,55 @@
-// Import the variables from index.js
-const {
-  currentUser,
-  welcomeMessage,
-  excitedWelcomeMessage,
-  shortGreeting,
-} = require("../index.js");
-
-// Import Mocha's describe and it functions
-const { describe, it } = require("mocha");
-// Import Chai's expect function for assertions
 const { expect } = require("chai");
 
-// Write your tests
-describe("currentUser", () => {
-  it("is defined", () => {
-    expect(currentUser).to.not.be.undefined;
+const {
+  scuberGreetingForFeet,
+  ternaryCheckCity,
+  switchOnCharmFromTip,
+} = require("../index.js");
+
+describe("index.js", function () {
+  describe("scuberGreetingForFeet()", function () {
+    it("gives customers a free sample if the ride is less than or equal to 400 feet", function () {
+      expect(scuberGreetingForFeet(199)).to.equal("This one is on me!");
+    });
+
+    it("charges 20 bucks for a distance between 400 and 2000 feet", function () {
+      expect(scuberGreetingForFeet(1500)).to.equal(
+        "That will be twenty bucks."
+      );
+    });
+
+    it("charges 30 bucks for a distance between 2000 and 2500 feet", function () {
+      expect(scuberGreetingForFeet(2200)).to.equal(
+        "I will gladly take your thirty bucks."
+      );
+    });
+
+    it("does not allow rides over 2500 feet", function () {
+      expect(scuberGreetingForFeet(2600)).to.equal("No can do.");
+    });
   });
 
-  it("is a string", () => {
-    expect(currentUser).to.be.a("string");
-  });
-});
+  describe("ternaryCheckCity()", function () {
+    it("returns 'Ok, sounds good.' when the city is NYC", function () {
+      expect(ternaryCheckCity("NYC")).to.equal("Ok, sounds good.");
+    });
 
-describe("welcomeMessage", () => {
-  it("is defined", () => {
-    expect(welcomeMessage).to.not.be.undefined;
-  });
-
-  it("contains the currentUser", () => {
-    expect(welcomeMessage).to.include(currentUser);
+    it("returns 'No go.' if the city is not NYC", function () {
+      expect(ternaryCheckCity("Los Angeles")).to.equal("No go.");
+    });
   });
 
-  it("ends with an exclamation point", () => {
-    expect(welcomeMessage.endsWith("!")).to.be.true;
-  });
-});
+  describe("switchOnCharmFromTip()", function () {
+    it("returns 'Thank you so much.' when the tip is generous", function () {
+      expect(switchOnCharmFromTip("generous")).to.equal("Thank you so much.");
+    });
 
-describe("excitedWelcomeMessage", () => {
-  it("is defined", () => {
-    expect(excitedWelcomeMessage).to.not.be.undefined;
-  });
+    it("returns 'Thank you.' when the tip is not as generous", function () {
+      expect(switchOnCharmFromTip("not as generous")).to.equal("Thank you.");
+    });
 
-  it("is in uppercase", () => {
-    expect(excitedWelcomeMessage).to.equal(welcomeMessage.toUpperCase());
-  });
-});
-
-describe("shortGreeting", () => {
-  it("is defined", () => {
-    expect(shortGreeting).to.not.be.undefined;
-  });
-
-  it('contains "Welcome, "', () => {
-    expect(shortGreeting).to.include("Welcome, ");
-  });
-
-  it("contains the first initial of the name stored in the currentUser variable", () => {
-    expect(shortGreeting).to.include(currentUser.slice(0, 1));
+    it("returns 'Bye.' for any other input", function () {
+      expect(switchOnCharmFromTip("average")).to.equal("Bye.");
+    });
   });
 });
